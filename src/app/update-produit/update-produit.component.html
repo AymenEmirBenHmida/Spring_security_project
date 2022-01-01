@@ -33,12 +33,21 @@
     <div class="col-sm-2 col-md-2 col-lg-2">
 
         <label >Author</label>
-        <select  [(ngModel)]="currentBook.author" name="author" class="form-control"  >
+        <select  [(ngModel)]="currentBook.author.idAuthor" name="author" class="form-control" >
 
-            <option *ngFor="let author of authors"  [ngValue]="author">{{author.nomAuthor}}</option>
+            <option *ngFor="let author of authors"  [ngValue]="author.idAuthor">{{author.nomAuthor}}</option>
 
         </select>
         </div>
+        <div *ngIf="currentBook.fileName ; else notShow" class="form-group">
+            <label>File Upload  </label>
+                <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                <img [src]="imgURL" height="200" *ngIf="imgURL">
+        </div>
+        <ng-template #notShow>
+            <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                <img [src]="imgURL" height="200" *ngIf="imgURL">
+          </ng-template>
     <div class="mt-2">
     <button type="submit" (click)="updateProduit()" class="btn btn-success">Modifer</button>
     </div>

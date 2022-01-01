@@ -1,4 +1,4 @@
-import { AuthService } from './../auth.service';
+import { AuthService } from '../auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Book } from '../model/book.model';
 import { BookService } from '../services/book.service';
@@ -7,20 +7,18 @@ import { AuthorService } from '../services/author.service';
 import { Author } from '../model/author.model';
 
 @Component({
-  selector: 'app-books',
-  templateUrl: './books.component.html',
-
+  selector: 'app-search-books',
+  templateUrl: './search-books.component.html',
+  styleUrls: ['./search-books.component.css']
 })
-export class BooksComponent implements OnInit {
+export class SearchBooksComponent implements OnInit {
+
   books: Book[];
   authors: Author[];
   author1: Author;
-  author2: Author = {
-    idAuthor: 0.1,
-    nomAuthor: 'hello',
-    dateNaissance: new Date()
-  };
+  
   auth: AuthService;
+  name: String;
 
   constructor(private bookService: BookService,
     private router: Router,
@@ -36,6 +34,7 @@ export class BooksComponent implements OnInit {
       console.log("admin = true");
     else
       console.log("admin = false");
+      this.name="";
     this.bookService.listeProduit().subscribe(prods => {
       console.log(prods);
       this.books = prods;
@@ -47,33 +46,30 @@ export class BooksComponent implements OnInit {
         }
 
       });
-     
+
     });
     this.autherService.listeAuthor().subscribe(prods => {
       console.log(prods);
       this.authors = prods;
     });
   }
-  consulterCertainProdui(id: number) {
-    if (id == 0.1) {
-      this.books = this.bookService.listeBooks();
-      this.router.navigate(['books']);
-      window.location.reload();
-    }
-    else {
+  findBooksByName( ) {
+    
+    this.bookService.findBooksByName(this.name).subscribe(prods => {
+      console.log(prods);
+      this.books = prods;
+      this.books.forEach((cur, index) => {
 
-      this.bookService.consulterCertainProdui(id).subscribe(prods => {
-        console.log(prods);
-        this.books = prods;
-        this.books.forEach((cur, index) => {
+        if (cur.fileName != null) {
+          cur.showImage = true;
+        }
 
-          if (cur.fileName != null) {
-            cur.showImage = true;
-          }
-  
-        });
       });
-    }
+      
+   console.log("entered findbookbyname");
+   
+    });
+    
   }
 
   supprimerProduit(p: Book) {

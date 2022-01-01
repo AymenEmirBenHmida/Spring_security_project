@@ -12,6 +12,7 @@ import { AuthorsComponent } from './authors/authors.component';
 import { AddAuthorComponent } from './add-author/add-author.component';
 import { UpdateAuthorComponent } from './update-author/update-author.component';
 import { LoginComponent } from './login/login.component';
+import { SearchBooksComponent } from './search-books/search-books.component';
 
 @NgModule({
   declarations: [
@@ -22,13 +23,15 @@ import { LoginComponent } from './login/login.component';
     AuthorsComponent,
     AddAuthorComponent,
     UpdateAuthorComponent,
-    LoginComponent
+    LoginComponent,
+    SearchBooksComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule      
   ],
   providers: [],
   bootstrap: [AppComponent]

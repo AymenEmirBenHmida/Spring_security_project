@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Author } from '../model/author.model';
 import { AuthorService } from '../services/author.service';
 import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-authors',
@@ -9,11 +10,11 @@ import { Router } from '@angular/router';
 })
 export class AuthorsComponent implements OnInit {
   authors : Author[];
-
+  auth: AuthService;
   constructor(private bookService : AuthorService,
-    private router:Router) {
+    private router:Router, authS : AuthService) {
     this.authors = bookService.listeAuthors();
-   
+   this.auth = authS;
    }
 
    ngOnInit(): void {

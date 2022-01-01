@@ -23,14 +23,23 @@ export class BookService {
     let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
   return this.http.get<Book[]>(this.apiURL,{headers:httpHeaders});
   }
-   listeBooks():Book[]{
-     return this.books;
-   }
-   ajouterBook( prod: Book):Observable<Book>{
+
+  findBooksByName(name: String):Observable<Book[]>{
     let jwt = this.authService.getToken();
     jwt = "Bearer "+jwt;
     let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
-    return this.http.post<Book>(this.apiURL, prod, {headers:httpHeaders});
+  return this.http.post<Book[]>(this.apiURL+"/findBookName",name,{headers:httpHeaders});
+  }
+   listeBooks():Book[]{
+     return this.books;
+   }
+   ajouterBook(formData: FormData):Observable<Book>{
+    let jwt = this.authService.getToken();
+    jwt = "Bearer "+jwt;
+    let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
+    console.log(formData);
+    
+    return this.http.post<Book>(this.apiURL, formData, {headers:httpHeaders});
     }
     supprimerProduit(id : number) {
       let jwt = this.authService.getToken();
@@ -48,12 +57,12 @@ export class BookService {
         return this.http.get<Book>(url,{headers:httpHeaders});
         }
       
-        updateProduit(prod :Book) : Observable<Book>
+        updateProduit(formData: FormData) : Observable<Book>
 {
   let jwt = this.authService.getToken();
         jwt = "Bearer "+jwt;
         let httpHeaders = new HttpHeaders({"Authorization":jwt}) 
-return this.http.put<Book>(this.apiURL, prod,{headers:httpHeaders});
+return this.http.put<Book>(this.apiURL, formData,{headers:httpHeaders});
 }
 consulterCertainProdui(id: number):Observable<Book[]> {
   const url = `${this.apiURL1}/${id}`;

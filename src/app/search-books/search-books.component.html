@@ -4,21 +4,20 @@
         <form>
             <div class="row">
             <div class="col-sm-4 col-md-4 col-lg-4">
-            <label > Find By Author</label>
-            <select  [(ngModel)]="author1" name="author1" class="form-control"  >
-                <option   [ngValue]="author2">all</option>
-                <option *ngFor="let author of authors"  [ngValue]="author">{{author.nomAuthor}}</option>
-    
-            </select>
+            <label > Search By Name</label>
+            
+            <input type="text" [(ngModel)]= "name"
+            name="name" class="form-control"  (ngModelChange)="findBooksByName()">
         </div>
         <div class="col-sm-4 col-md-4 col-lg-4">
             <br>
-            <button type="submit" (click)=consulterCertainProdui(author1.idAuthor) class="btn btn-success">recherche</button>
+            
             </div>
         </div>
         </form>
+        <br>
     <table class="table table-striped">
-    <tr> <th>Id</th><th>Nom</th> <th>Prix</th> <th>Date Création</th> <th>Description</th><th>Author</th><th style=" text-align: center;
+    <tr> <th>Id</th><th>Nom</th> <th>Prix</th> <th>Date Création</th> <th>Description</th><th style=" text-align: center;
         vertical-align: middle;">Image</th></tr>
     <tbody *ngFor="let book of books">
     <tr >
@@ -32,8 +31,6 @@
     vertical-align: middle;">{{book.datePublication | date:'dd/MM/yyyy'}}</td>
     <td style=" text-align: center;
     vertical-align: middle;">{{book.descriptionBook}}</td>
-    <td style=" text-align: center;
-    vertical-align: middle;">{{book.author.nomAuthor}}</td>
     <td><a  *ngIf="book.showImage" href="#"><img class="card-img-top img-responsive"
         src = "{{this.bookService.apiURL+'/ImageBook/'+book.idBook}}" 
         style = "height :200px;width:fil-content"

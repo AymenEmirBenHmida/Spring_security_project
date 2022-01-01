@@ -33,6 +33,11 @@
         
                 </select>
                 </div>
+                <div class="form-group">
+                    <label>File Upload  </label>
+                        <input type="file" accept="image/*" (change)="onSelectFile($event)">
+                        <img [src]="imgURL" height="200" *ngIf="imgURL">
+                </div>
         
             
         <div class="mt-2">

@@ -8,4 +8,6 @@ export class Book {
     datePublication : Date ;
     descriptionBook: string ;
     author :Author;
+    fileName:any;
+    showImage:any;
     }

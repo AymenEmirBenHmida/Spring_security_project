@@ -8,6 +8,7 @@ import { UpdateProduitComponent } from 'src/app/update-produit/update-produit.co
 import { AuthorsComponent } from './authors/authors.component';
 import { AddAuthorComponent } from './add-author/add-author.component';
 import { UpdateAuthorComponent } from './update-author/update-author.component';
+import { SearchBooksComponent } from './search-books/search-books.component';
 
 const routes: Routes = [
   {path: "books", component : BooksComponent},
@@ -18,6 +19,7 @@ const routes: Routes = [
   {path: "add-author", component : AddAuthorComponent},
   {path:"updateAuthor/:id", component: UpdateAuthorComponent},
   {path:  'login', component: LoginComponent},
+  {path:  'search-books', component: SearchBooksComponent}
 
 ];
 
